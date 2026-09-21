@@ -401,55 +401,353 @@ function createFloatingElements() {
 
     floatingZone.innerHTML = "";
 
-    const mobile = window.innerWidth <= 600;
+    const mobile =
+        window.innerWidth <= 600;
 
-    const positions = mobile
-    ? [
-        [6, 28], [61, 28],
-        [6, 39], [61, 39],
-        [6, 50], [61, 50],
-        [6, 61], [61, 61],
-        [6, 72], [61, 72],
-        [16, 83], [48, 83],
-        [18, 34], [47, 44],
-        [18, 66], [45, 76],
-        [46, 56], [46, 70]
-      ]
-    : [
-        [5, 31], [23, 29], [63, 29], [81, 31],
+
+    /* =========================
+       CELULAR
+    ========================= */
+
+    if (mobile) {
+
+        createMobileOrbit();
+
+        return;
+    }
+
+
+    /* =========================
+       PC
+       Conservamos tu diseño actual
+    ========================= */
+
+    const positions = [
+
+        [5, 31], [23, 29],
+        [63, 29], [81, 31],
+
         [5, 47], [81, 47],
+
         [5, 63], [81, 63],
+
         [6, 78], [80, 78],
 
         [19, 43], [66, 43],
+
         [18, 58], [68, 58],
+
         [18, 72], [67, 72],
+
         [32, 50], [54, 50]
-      ];
 
-    phrases.forEach((phrase, index) => {
-        const text = document.createElement("div");
+    ];
 
-        text.className = "float-text";
 
-        if (index % 3 === 0 || index % 5 === 0) {
-            text.classList.add("yellow");
+    phrases.forEach(
+        (phrase, index) => {
+
+            const text =
+                document.createElement(
+                    "div"
+                );
+
+            text.className =
+                "float-text";
+
+
+            if (
+                index % 3 === 0
+                ||
+                index % 5 === 0
+            ) {
+
+                text.classList.add(
+                    "yellow"
+                );
+
+            }
+
+
+            const pos =
+                positions[
+                    index
+                    %
+                    positions.length
+                ];
+
+
+            text.textContent =
+                phrase;
+
+
+            text.style.left =
+                `${pos[0]}%`;
+
+
+            text.style.top =
+                `${pos[1]}%`;
+
+
+            text.style.animationDelay =
+                `${index * 0.22}s`;
+
+
+            floatingZone.appendChild(
+                text
+            );
+
         }
+    );
 
-        const pos = positions[index % positions.length];
 
-        text.textContent = phrase;
-        text.style.left = `${pos[0]}%`;
-        text.style.top = `${pos[1]}%`;
-        text.style.animationDelay = `${index * 0.22}s`;
+    createSunflowers(false);
 
-        floatingZone.appendChild(text);
-    });
+    createBouquets(false);
 
-    createSunflowers(mobile);
-    createBouquets(mobile);
 }
 
+function createMobileOrbit() {
+
+    /*
+       Dividimos las frases
+       en grupos de 4.
+    */
+
+    const phrasesPerPage = 4;
+
+
+    for (
+        let i = 0;
+        i < phrases.length;
+        i += phrasesPerPage
+    ) {
+
+        const page =
+            document.createElement(
+                "section"
+            );
+
+
+        page.className =
+            "orbit-page";
+
+
+        const group =
+            phrases.slice(
+                i,
+                i + phrasesPerPage
+            );
+
+
+        const positions = [
+
+            "left-top",
+            "right-top",
+            "left-bottom",
+            "right-bottom"
+
+        ];
+
+
+        group.forEach(
+            (phrase, index) => {
+
+                const card =
+                    document.createElement(
+                        "div"
+                    );
+
+
+                card.className =
+                    `orbit-card ${positions[index]}`;
+
+
+                if (
+                    (
+                        i + index
+                    ) % 3 === 0
+                ) {
+
+                    card.classList.add(
+                        "yellow"
+                    );
+
+                }
+
+
+                card.textContent =
+                    phrase;
+
+
+                page.appendChild(
+                    card
+                );
+
+            }
+        );
+
+
+        /* Girasol izquierdo */
+
+        const flowerLeft =
+            document.createElement(
+                "div"
+            );
+
+        flowerLeft.className =
+            "orbit-flower flower-a";
+
+        flowerLeft.textContent =
+            "🌻";
+
+        page.appendChild(
+            flowerLeft
+        );
+
+
+        /* Girasol derecho */
+
+        const flowerRight =
+            document.createElement(
+                "div"
+            );
+
+        flowerRight.className =
+            "orbit-flower flower-b";
+
+        flowerRight.textContent =
+            "🌻";
+
+        page.appendChild(
+            flowerRight
+        );
+
+
+        floatingZone.appendChild(
+            page
+        );
+
+    }
+
+
+    /* =========================
+       ÚLTIMA PANTALLA
+    ========================= */
+
+    const finalPage =
+        document.createElement(
+            "section"
+        );
+
+
+    finalPage.className =
+        "orbit-page";
+
+
+    const finalContent =
+        document.createElement(
+            "div"
+        );
+
+
+    finalContent.className =
+        "orbit-final";
+
+
+    const finalName =
+        personName
+            ? `${personName}, eres pura alegría.`
+            : "Eres pura alegría.";
+
+
+    finalContent.innerHTML = `
+
+        <div style="
+            font-size:3rem;
+            margin-bottom:10px;
+        ">
+            🌻
+        </div>
+
+        <h2>
+            ${finalName}
+        </h2>
+
+        <p>
+            Que estas flores amarillas
+            te recuerden lo especial
+            que eres.
+        </p>
+
+        <div style="
+            font-size:2rem;
+            margin-top:15px;
+        ">
+            ✨
+        </div>
+
+    `;
+
+
+    finalPage.appendChild(
+        finalContent
+    );
+
+
+    floatingZone.appendChild(
+        finalPage
+    );
+
+}
+
+function activateOrbitEffect() {
+
+    if (
+        window.innerWidth > 600
+    ) {
+        return;
+    }
+
+
+    floatingZone.addEventListener(
+        "scroll",
+        () => {
+
+            const scroll =
+                floatingZone.scrollLeft;
+
+
+            const portal =
+                document.querySelector(
+                    ".portal"
+                );
+
+
+            if (!portal) {
+                return;
+            }
+
+
+            const rotation =
+                scroll * 0.08;
+
+
+            const movement =
+                Math.sin(
+                    scroll * 0.004
+                ) * 8;
+
+
+            portal.style.transform = `
+                translateY(${movement}px)
+                rotate(${rotation}deg)
+            `;
+
+        }
+    );
+
+}
 
 /* =====================================
    GIRASOLES
@@ -636,3 +934,5 @@ window.addEventListener(
 resizeCanvas();
 
 animate();
+
+activateOrbitEffect();
