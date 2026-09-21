@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Flores Amarillas</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=Poppins:wght@300;400;600&display=swap"
+        rel="stylesheet"
+    >
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="scene">
+
+    <!-- Fondo animado -->
+    <canvas id="stars"></canvas>
+
+    <!-- Resplandor central -->
+    <div class="central-light"></div>
+
+    <!-- Título -->
+    <header class="hero">
+
+        <h1>
+            Feliz día de las
+            <br>
+            Flores Amarillas 🌻
+        </h1>
+
+        <p id="dedicatoria">
+            Un pequeño detalle para ti
+        </p>
+
+    </header>
+
+
+    <!-- Galaxia / portal -->
+    <div class="portal-container">
+
+        <div class="portal">
+
+            <div class="portal-light"></div>
+
+            <div class="portal-center"></div>
+
+            <div class="portal-ring ring-1"></div>
+
+            <div class="portal-ring ring-2"></div>
+
+        </div>
+
+    </div>
+
+
+    <!-- Elementos generados por JavaScript -->
+    <div id="floatingZone"></div>
+
+
+    <!-- Mensaje destacado -->
+    <section class="main-message">
+
+        <p id="messageName"></p>
+
+        <p id="messageText">
+            Que estas flores amarillas te recuerden
+            lo especial que eres.
+        </p>
+
+    </section>
+
+
+    <!-- Mensaje final -->
+    <div id="finalMessage" class="final-message">
+
+        <span>🌻</span>
+
+        <p id="finalText">
+            Que nunca te falten motivos para sonreír.
+        </p>
+
+        <span>✨</span>
+
+    </div>
+
+
+    <!-- Girasol inferior -->
+    <div class="bottom-sunflower">
+        🌻
+    </div>
+
+
+    <!-- Música -->
+    <audio id="music" autoplay loop preload="auto">
+    <source src="sound/musica.mp3" type="audio/mpeg">
+</audio>
+
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>
