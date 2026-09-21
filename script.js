@@ -123,11 +123,10 @@ let fallingStars = [];
 
 function resizeCanvas() {
 
-    const dpr =
-        Math.min(
-            window.devicePixelRatio || 1,
-            2
-        );
+    const dpr = Math.min(
+        window.devicePixelRatio || 1,
+        2
+    );
 
     canvas.width =
         window.innerWidth * dpr;
@@ -151,9 +150,6 @@ function resizeCanvas() {
     );
 
     createStars();
-
-    createFloatingElements();
-
 }
 
 
@@ -923,16 +919,58 @@ setInterval(
 
 
 /* =====================================
-   INICIAR
+   INICIO
 ===================================== */
+
+let mobileMode =
+    window.innerWidth <= 600;
+
+
+/* Ajustar solamente el canvas */
+function handleResize() {
+
+    resizeCanvas();
+
+    const newMobileMode =
+        window.innerWidth <= 600;
+
+
+    /*
+       Solo reconstruir el diseño
+       si realmente cambiamos
+       entre PC y celular.
+    */
+    if (
+        newMobileMode !== mobileMode
+    ) {
+
+        mobileMode =
+            newMobileMode;
+
+        createFloatingElements();
+
+    }
+
+}
+
 
 window.addEventListener(
     "resize",
-    resizeCanvas
+    handleResize
 );
 
+
+/* Preparar canvas */
 resizeCanvas();
 
-animate();
 
+/* Crear las frases UNA sola vez */
+createFloatingElements();
+
+
+/* Activar movimiento horizontal */
 activateOrbitEffect();
+
+
+/* Iniciar estrellas */
+animate();
