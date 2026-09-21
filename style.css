@@ -656,319 +656,712 @@ body {
     }
 
 }
-/* =================================================
-   EXPERIENCIA HORIZONTAL PARA CELULAR
-================================================= */
+
+/* =========================================================
+   VERSIÓN MÓVIL - ÓRBITA AUTOMÁTICA
+========================================================= */
 
 @media screen and (max-width: 600px) {
 
+    /* =====================================================
+       PÁGINA
+    ===================================================== */
+
     html,
     body {
+        margin: 0;
+        padding: 0;
+
         width: 100%;
         height: 100%;
-        margin: 0;
 
-        overflow-x: hidden;
-        overflow-y: hidden;
+        overflow: hidden;
 
         background: #000;
     }
+
+
+    body {
+        position: relative;
+    }
+
 
     .scene {
         position: relative;
 
         width: 100vw;
-        height: 100svh;
-        min-height: 100svh;
+
+        height: 100vh;
+        height: 100dvh;
+
+        min-height: 100vh;
 
         overflow: hidden;
+
+        background:
+            radial-gradient(
+                circle at 50% 48%,
+                rgba(255, 210, 0, 0.08),
+                transparent 35%
+            ),
+            #000;
     }
 
 
-    /* =========================
+    /* =====================================================
+       ESTRELLAS
+    ===================================================== */
+
+    #stars {
+        position: absolute;
+
+        top: 0;
+        left: 0;
+
+        width: 100%;
+        height: 100%;
+
+        z-index: 1;
+
+        pointer-events: none;
+    }
+
+
+    /* =====================================================
+       LUZ CENTRAL
+    ===================================================== */
+
+    .central-light {
+        position: absolute;
+
+        left: 50%;
+        top: 48%;
+
+        transform:
+            translate(-50%, -50%);
+
+        width: 420px;
+        height: 420px;
+
+        z-index: 2;
+
+        opacity: 0.8;
+
+        pointer-events: none;
+    }
+
+
+    /* =====================================================
        TÍTULO
-    ========================= */
+    ===================================================== */
 
     .hero {
-        position: fixed;
+        position: absolute;
 
-        top: 25px;
+        top: 4%;
         left: 50%;
 
-        transform: translateX(-50%);
+        transform:
+            translateX(-50%);
 
         width: 94%;
 
+        text-align: center;
+
         z-index: 100;
+
+        pointer-events: none;
     }
+
 
     .hero h1 {
-        font-size: clamp(2.3rem, 9vw, 3.2rem);
-        line-height: 1.05;
+        margin: 0;
+
+        font-size:
+            clamp(
+                2.55rem,
+                10vw,
+                3.4rem
+            );
+
+        line-height: 1.02;
+
+        color: #fff080;
+
+        text-shadow:
+            0 0 6px #fff6a0,
+            0 0 12px #ffd900,
+            0 0 25px #ffbf00,
+            0 0 45px rgba(255, 180, 0, 0.8);
     }
+
 
     #dedicatoria {
-        margin-top: 10px;
-        font-size: 1.15rem;
+        margin-top: 14px;
+
+        font-size: 1.25rem;
+
+        color: #fff4b0;
+
+        text-shadow:
+            0 0 9px
+            rgba(255, 215, 0, 0.55);
     }
 
 
-    /* =========================
-       PORTAL FIJO
-    ========================= */
+    /* =====================================================
+       PORTAL CENTRAL
+    ===================================================== */
 
     .portal-container {
-        position: fixed;
+        position: absolute;
 
-        top: 45%;
         left: 50%;
+        top: 49%;
 
-        transform: translate(-50%, -50%);
+        transform:
+            translate(-50%, -50%);
 
         z-index: 20;
 
         pointer-events: none;
     }
 
+
     .portal {
-        width: 230px;
-        height: 95px;
+        position: relative;
+
+        width: 245px;
+        height: 100px;
+
+        animation:
+            portalFloatMobile
+            4s
+            ease-in-out
+            infinite;
     }
 
 
-    /* =========================
-       PISTA HORIZONTAL
-    ========================= */
+    .portal-light {
+        position: absolute;
 
-    #floatingZone {
-    position: absolute;
+        inset: 0;
 
-    top: 0;
-    left: 0;
+        border-radius: 50%;
 
-    width: 100%;
-    height: 100%;
+        background:
+            radial-gradient(
+                ellipse,
+                rgba(255, 255, 220, 1) 0%,
+                rgba(255, 247, 150, 1) 15%,
+                rgba(255, 228, 55, 0.98) 34%,
+                rgba(255, 204, 0, 0.95) 52%,
+                rgba(255, 200, 0, 0.12) 70%,
+                transparent 78%
+            );
 
-    display: flex;
-
-    overflow-x: auto;
-    overflow-y: hidden;
-
-    scroll-snap-type: x mandatory;
-    scroll-behavior: smooth;
-
-    -webkit-overflow-scrolling: touch;
-
-    pointer-events: auto;
-
-    z-index: 30;
-}
+        box-shadow:
+            0 0 15px #fff3a1,
+            0 0 35px #ffe000,
+            0 0 75px rgba(255, 215, 0, 0.7),
+            0 0 115px rgba(255, 190, 0, 0.4);
+    }
 
 
-    /* =========================
-       CADA "VUELTA" O PANTALLA
-    ========================= */
+    .portal-center {
+        position: absolute;
 
-    .orbit-page {
-        position: relative;
+        left: 50%;
+        top: 22%;
 
-        min-width: 100vw;
-        width: 100vw;
-        height: 100svh;
+        transform:
+            translateX(-50%);
 
-        flex-shrink: 0;
+        width: 39%;
+        height: 52%;
 
-        scroll-snap-align: start;
+        border-radius: 50%;
 
-        display: flex;
-        align-items: center;
-        justify-content: center;
+        background:
+            radial-gradient(
+                ellipse,
+                #050505 0%,
+                #000 70%
+            );
 
-        padding:
-            160px
-            25px
-            110px;
+        box-shadow:
+            inset 0 0 12px #000;
+    }
+
+
+    /* =====================================================
+       ANILLOS
+    ===================================================== */
+
+    .portal-ring {
+        position: absolute;
+
+        left: 50%;
+        top: 50%;
+
+        border-radius: 50%;
+
+        border:
+            2px solid
+            rgba(255, 235, 90, 0.35);
 
         pointer-events: none;
     }
 
 
-    /* =========================
-       FRASES
-    ========================= */
+    .portal-ring.ring-1 {
+        width: 112%;
+        height: 112%;
+
+        animation:
+            mobileRingOne
+            8s
+            linear
+            infinite;
+    }
+
+
+    .portal-ring.ring-2 {
+        width: 132%;
+        height: 132%;
+
+        opacity: 0.45;
+
+        animation:
+            mobileRingTwo
+            13s
+            linear
+            infinite;
+    }
+
+
+    /* =====================================================
+       CONTENEDOR DE LA ÓRBITA
+    ===================================================== */
+
+    #floatingZone {
+        position: absolute;
+
+        inset: 0;
+
+        width: 100%;
+        height: 100%;
+
+        overflow: hidden;
+
+        z-index: 30;
+
+        pointer-events: none;
+    }
+
+
+    /* =====================================================
+       PISTA AUTOMÁTICA
+
+       El JavaScript mueve esta pista completa.
+    ===================================================== */
+
+    .orbit-track {
+        position: absolute;
+
+        top: 0;
+        left: 0;
+
+        display: flex;
+
+        width: max-content;
+        height: 100%;
+
+        transform:
+            translate3d(0, 0, 0);
+
+        transition:
+            transform
+            1.6s
+            cubic-bezier(
+                0.65,
+                0,
+                0.35,
+                1
+            );
+
+        will-change: transform;
+    }
+
+
+    /* =====================================================
+       CADA VUELTA DE LA GALAXIA
+    ===================================================== */
+
+    .orbit-page {
+        position: relative;
+
+        width: 100vw;
+        min-width: 100vw;
+
+        height: 100%;
+        min-height: 100%;
+
+        flex: 0 0 100vw;
+
+        overflow: hidden;
+    }
+
+
+    /* =====================================================
+       TARJETAS DE FRASES
+    ===================================================== */
 
     .orbit-card {
         position: absolute;
 
-        width: 42vw;
-        max-width: 170px;
+        width: 41vw;
+        max-width: 165px;
 
-        padding: 8px 10px;
+        padding:
+            10px
+            9px;
 
-        border-radius: 18px;
+        border-radius: 20px;
 
-        font-family: "Caveat", cursive;
+        font-family:
+            "Caveat",
+            cursive;
 
-        font-size: 1.15rem;
-        line-height: 1.25;
+        font-size:
+            clamp(
+                1rem,
+                4.1vw,
+                1.18rem
+            );
+
+        line-height: 1.28;
 
         text-align: center;
 
-        color: white;
+        color: #fff;
 
         background:
-            rgba(0, 0, 0, 0.32);
+            rgba(
+                0,
+                0,
+                0,
+                0.38
+            );
 
-        backdrop-filter: blur(3px);
+        backdrop-filter:
+            blur(4px);
+
+        -webkit-backdrop-filter:
+            blur(4px);
 
         text-shadow:
-            0 0 6px rgba(255,255,255,0.6),
-            2px 2px 5px #000;
+            0 0 6px
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.65
+                ),
+            2px 2px 5px
+                rgba(
+                    0,
+                    0,
+                    0,
+                    0.95
+                );
+
+        box-shadow:
+            0 0 18px
+            rgba(
+                255,
+                210,
+                0,
+                0.06
+            );
 
         animation:
-            mobileFloat 5s ease-in-out infinite;
+            orbitCardFloat
+            5s
+            ease-in-out
+            infinite;
     }
+
 
     .orbit-card.yellow {
-        color: #ffe23f;
+        color: #ffe138;
 
         text-shadow:
-            0 0 8px rgba(255, 220, 0, 0.8),
-            2px 2px 5px #000;
+            0 0 7px
+                rgba(
+                    255,
+                    220,
+                    0,
+                    0.8
+                ),
+            2px 2px 5px
+                rgba(
+                    0,
+                    0,
+                    0,
+                    0.95
+                );
     }
 
 
-    /* posiciones alrededor del portal */
+    /* =====================================================
+       POSICIONES DE LAS 4 FRASES
+
+              frase     frase
+
+                  SOL
+
+              frase     frase
+    ===================================================== */
 
     .orbit-card.left-top {
-        left: 5%;
-        top: 32%;
+        left: 4%;
+        top: 31%;
     }
+
 
     .orbit-card.right-top {
-        right: 5%;
-        top: 32%;
+        right: 4%;
+        top: 31%;
     }
+
 
     .orbit-card.left-bottom {
-        left: 5%;
-        top: 61%;
+        left: 4%;
+        top: 64%;
     }
+
 
     .orbit-card.right-bottom {
-        right: 5%;
-        top: 61%;
+        right: 4%;
+        top: 64%;
     }
 
 
-    /* =========================
-       FLORES
-    ========================= */
+    /* =====================================================
+       FLORES DE CADA VUELTA
+    ===================================================== */
 
     .orbit-flower {
         position: absolute;
 
-        font-size: 2.5rem;
+        top: 50%;
+
+        font-size:
+            clamp(
+                2.2rem,
+                10vw,
+                2.8rem
+            );
+
+        transform:
+            translateY(-50%);
 
         filter:
             drop-shadow(
-                0 0 10px rgba(255, 210, 0, 0.7)
+                0 0 10px
+                rgba(
+                    255,
+                    205,
+                    0,
+                    0.7
+                )
             );
 
         animation:
-            orbitFlower 5s ease-in-out infinite;
+            orbitFlowerMobile
+            5s
+            ease-in-out
+            infinite;
     }
+
 
     .orbit-flower.flower-a {
-        left: 8%;
-        top: 48%;
+        left: 5%;
     }
+
 
     .orbit-flower.flower-b {
-        right: 8%;
-        top: 48%;
+        right: 5%;
+
+        animation-delay:
+            1.3s;
     }
 
 
-    /* =========================
-       PÁGINA FINAL
-    ========================= */
+    /* =====================================================
+       PANTALLA FINAL
+    ===================================================== */
 
     .orbit-final {
-        width: 88%;
+        position: absolute;
 
-        padding: 25px;
+        left: 50%;
+        top: 58%;
 
-        border-radius: 26px;
+        transform:
+            translate(-50%, -50%);
 
-        background:
-            rgba(0, 0, 0, 0.48);
+        width: 86%;
+        max-width: 430px;
 
-        backdrop-filter: blur(8px);
+        padding:
+            25px
+            20px;
+
+        border-radius: 28px;
 
         text-align: center;
 
+        background:
+            rgba(
+                0,
+                0,
+                0,
+                0.55
+            );
+
+        backdrop-filter:
+            blur(8px);
+
+        -webkit-backdrop-filter:
+            blur(8px);
+
         box-shadow:
-            0 0 30px
-            rgba(255, 215, 0, 0.15);
+            0 0 18px
+                rgba(
+                    255,
+                    220,
+                    0,
+                    0.16
+                ),
+            0 0 40px
+                rgba(
+                    255,
+                    200,
+                    0,
+                    0.08
+                );
     }
 
+
     .orbit-final h2 {
-        font-family: "Caveat", cursive;
+        margin: 0;
 
-        font-size: 2.8rem;
+        font-family:
+            "Caveat",
+            cursive;
 
-        color: #ffe035;
+        font-size:
+            clamp(
+                2.3rem,
+                9vw,
+                3rem
+            );
+
+        line-height: 1.05;
+
+        color: #ffe033;
 
         text-shadow:
             0 0 10px
-            rgba(255, 210, 0, 0.8);
+            rgba(
+                255,
+                210,
+                0,
+                0.75
+            );
     }
 
+
     .orbit-final p {
-        margin-top: 10px;
+        margin:
+            14px
+            auto
+            0;
 
-        font-family: "Caveat", cursive;
+        max-width: 300px;
 
-        font-size: 1.7rem;
+        font-family:
+            "Caveat",
+            cursive;
+
+        font-size:
+            clamp(
+                1.45rem,
+                6vw,
+                1.85rem
+            );
 
         line-height: 1.25;
 
         color: #fff9d5;
+
+        text-shadow:
+            2px 2px 5px
+            rgba(
+                0,
+                0,
+                0,
+                0.95
+            );
     }
 
 
-    /* =========================
-       OCULTAMOS ELEMENTOS DE PC
-    ========================= */
+    /* =====================================================
+       OCULTAR ELEMENTOS DE PC
+    ===================================================== */
 
-    .main-message {
+    .float-text {
         display: none;
     }
 
-    .final-message {
-        display: none !important;
-    }
 
-    .bottom-sunflower {
+    .sunflower {
         display: none;
     }
+
 
     .bouquet {
         display: none;
     }
 
 
-    /* =========================
-       ANIMACIONES
-    ========================= */
+    .main-message {
+        display: none;
+    }
 
-    @keyframes mobileFloat {
+
+    .final-message {
+        display: none !important;
+    }
+
+
+    .bottom-sunflower {
+        display: none;
+    }
+
+
+    /* =====================================================
+       ANIMACIONES
+    ===================================================== */
+
+    @keyframes portalFloatMobile {
 
         0%,
         100% {
             transform:
-                translateY(0px);
+                translateY(0);
         }
 
         50% {
@@ -978,20 +1371,118 @@ body {
 
     }
 
-    @keyframes orbitFlower {
+
+    @keyframes orbitCardFloat {
 
         0%,
         100% {
             transform:
-                translateY(0)
-                rotate(-4deg);
+                translateY(0);
         }
 
         50% {
             transform:
-                translateY(-10px)
-                rotate(4deg);
+                translateY(-7px);
         }
 
     }
+
+
+    @keyframes orbitFlowerMobile {
+
+        0%,
+        100% {
+            transform:
+                translateY(-50%)
+                rotate(-5deg)
+                scale(1);
+        }
+
+        50% {
+            transform:
+                translateY(
+                    calc(-50% - 8px)
+                )
+                rotate(5deg)
+                scale(1.05);
+        }
+
+    }
+
+
+    @keyframes mobileRingOne {
+
+        0% {
+            transform:
+                translate(
+                    -50%,
+                    -50%
+                )
+                rotate(0deg)
+                scale(0.95);
+
+            opacity: 0.25;
+        }
+
+        50% {
+            transform:
+                translate(
+                    -50%,
+                    -50%
+                )
+                rotate(180deg)
+                scale(1.08);
+
+            opacity: 0.55;
+        }
+
+        100% {
+            transform:
+                translate(
+                    -50%,
+                    -50%
+                )
+                rotate(360deg)
+                scale(0.95);
+
+            opacity: 0.25;
+        }
+
+    }
+
+
+    @keyframes mobileRingTwo {
+
+        0% {
+            transform:
+                translate(
+                    -50%,
+                    -50%
+                )
+                rotate(360deg)
+                scale(1);
+        }
+
+        50% {
+            transform:
+                translate(
+                    -50%,
+                    -50%
+                )
+                rotate(180deg)
+                scale(1.12);
+        }
+
+        100% {
+            transform:
+                translate(
+                    -50%,
+                    -50%
+                )
+                rotate(0deg)
+                scale(1);
+        }
+
+    }
+
 }
